@@ -404,8 +404,6 @@ footer.site .credit a:hover{text-decoration:underline}
             <option>Casamento</option><option>Aniversário</option><option>Aniversário infantil</option><option>Chá de bebê</option><option>Despedida de solteiro</option><option>Confraternização de empresa</option><option>Festa em casa</option><option>Outro</option>
           </select></div>
         <div class="field"><label for="f-conv">Nº aproximado de convidados</label><input id="f-conv" name="convidados" type="number" min="1" inputmode="numeric" placeholder="Ex.: 80"></div>
-        <div class="field full"><label for="f-local">Local do evento</label><input id="f-local" name="local" autocomplete="street-address" placeholder="Endereço ou nome do espaço. Ex.: Rua X, 100, Pampulha">
-          <span class="field-note">O link do Google Maps vai junto na mensagem.</span></div>
         <div class="field full"><label for="f-garc">Garçonetes extras</label>
           <p class="field-note">1 garçonete já está inclusa no orçamento. Se precisar de mais, escolha aqui.</p>
           <select id="f-garc" name="garconetes">
@@ -415,6 +413,8 @@ footer.site .credit a:hover{text-decoration:underline}
             <option value="3">+3 ou mais garçonetes extras</option>
             <option value="?">Não sei, quero uma indicação</option>
           </select></div>
+        <div class="field full"><label for="f-local">Local do evento</label><input id="f-local" name="local" autocomplete="street-address" placeholder="Endereço ou nome do espaço. Ex.: Rua X, 100, Pampulha">
+          <span class="field-note">O link do Google Maps vai junto na mensagem.</span></div>
         <div class="field full"><label for="f-obs">Algo mais? (opcional)</label><textarea id="f-obs" name="obs" placeholder="Horário, sabores que você já tem em mente, restrições..."></textarea></div>
         <a class="btn btn-main" id="sendBtn" href="https://wa.me/5531993256696" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Enviar pelo WhatsApp</a>
         <p class="form-hint">Sem compromisso.</p>
@@ -473,11 +473,11 @@ footer.site .credit a:hover{text-decoration:underline}
     if(g('f-data'))lines.push('Data do evento: '+fmtDate(g('f-data')));
     if(g('f-tipo'))lines.push('Tipo de evento: '+g('f-tipo'));
     if(g('f-conv'))lines.push('Convidados: '+g('f-conv'));
+    var gc=g('f-garc'), gt={'0':'não, só a inclusa','1':'+1 extra (além da inclusa)','2':'+2 extras (além da inclusa)','3':'+3 ou mais extras (além da inclusa)','?':'quero uma indicação'};
+    if(gc)lines.push('Garçonetes extras: '+(gt[gc]||gc));
     var loc=g('f-local');
     if(loc)lines.push('Local: '+loc);
     if(loc)lines.push('Mapa: https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(/\b(mg|minas)\b/i.test(loc)?loc:loc+', MG'));
-    var gc=g('f-garc'), gt={'0':'não, só a inclusa','1':'+1 extra (além da inclusa)','2':'+2 extras (além da inclusa)','3':'+3 ou mais extras (além da inclusa)','?':'quero uma indicação'};
-    if(gc)lines.push('Garçonetes extras: '+(gt[gc]||gc));
     if(g('f-obs'))lines.push('Obs.: '+g('f-obs'));
     btn.href='https://wa.me/'+PHONE+'?text='+encodeURIComponent(lines.join('\n'));
   }
