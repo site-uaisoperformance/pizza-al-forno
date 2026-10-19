@@ -184,11 +184,6 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ember)}
 form .btn{grid-column:1/-1;width:100%;font-size:1.05rem;padding:18px}
 .form-hint{grid-column:1/-1;color:var(--muted);font-size:.85rem;text-align:center}
 .field-note{margin:0;color:var(--muted);font-size:.82rem;line-height:1.4}
-.loc-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
-.loc-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--line);color:var(--cream);border-radius:999px;padding:7px 14px;font:600 .85rem var(--body);cursor:pointer}
-.loc-btn svg{width:15px;height:15px;fill:var(--clay)}
-.loc-btn:hover{border-color:var(--clay)}
-.loc-btn.on{border-color:var(--ember);color:var(--ember)}
 @media (max-width:860px){.form-grid{grid-template-columns:1fr}.form-side .arch{display:none}}
 @media (max-width:480px){form{grid-template-columns:1fr}}
 
@@ -410,7 +405,7 @@ footer.site .credit a:hover{text-decoration:underline}
           </select></div>
         <div class="field"><label for="f-conv">Nº aproximado de convidados</label><input id="f-conv" name="convidados" type="number" min="1" inputmode="numeric" placeholder="Ex.: 80"></div>
         <div class="field full"><label for="f-local">Local do evento</label><input id="f-local" name="local" autocomplete="street-address" placeholder="Endereço ou nome do espaço. Ex.: Rua X, 100, Pampulha">
-          <div class="loc-row"><button type="button" class="loc-btn" id="locBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg><span>Usar minha localização</span></button><span class="field-note" id="locNote">O link do Google Maps vai junto na mensagem.</span></div></div>
+          <span class="field-note">O link do Google Maps vai junto na mensagem.</span></div>
         <div class="field full"><label for="f-garc">Garçonetes extras</label>
           <p class="field-note">1 garçonete já está inclusa no orçamento. Se precisar de mais, escolha aqui.</p>
           <select id="f-garc" name="garconetes">
@@ -471,16 +466,6 @@ footer.site .credit a:hover{text-decoration:underline}
   document.querySelectorAll('.wa-link').forEach(function(a){a.href='https://wa.me/'+PHONE+'?text='+encodeURIComponent(base);});
   var f=document.getElementById('quoteForm'), btn=document.getElementById('sendBtn');
   function fmtDate(v){if(!v)return'';var p=v.split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:v;}
-  var coords='', lb=document.getElementById('locBtn'), ln=document.getElementById('locNote'), lbt=lb.querySelector('span');
-  lb.addEventListener('click',function(){
-    if(coords){coords='';lb.classList.remove('on');lbt.textContent='Usar minha localização';ln.textContent='O link do Google Maps vai junto na mensagem.';build();return;}
-    if(!navigator.geolocation){ln.textContent='Seu navegador não permite. Digite o endereço acima.';return;}
-    lbt.textContent='Buscando...';
-    navigator.geolocation.getCurrentPosition(function(pos){
-      coords=pos.coords.latitude.toFixed(6)+','+pos.coords.longitude.toFixed(6);
-      lb.classList.add('on');lbt.textContent='Localização adicionada (remover)';ln.textContent='O ponto no mapa vai junto na mensagem.';build();
-    },function(){lbt.textContent='Usar minha localização';ln.textContent='Não deu para pegar a localização. Digite o endereço acima.';},{enableHighAccuracy:true,timeout:10000});
-  });
   function build(){
     var g=function(id){return (document.getElementById(id).value||'').trim();};
     var lines=['Olá! Quero um orçamento da Pizza Al Forno.'];
@@ -490,8 +475,7 @@ footer.site .credit a:hover{text-decoration:underline}
     if(g('f-conv'))lines.push('Convidados: '+g('f-conv'));
     var loc=g('f-local');
     if(loc)lines.push('Local: '+loc);
-    if(coords)lines.push('Mapa: https://www.google.com/maps?q='+coords);
-    else if(loc)lines.push('Mapa: https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(loc));
+    if(loc)lines.push('Mapa: https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(/\b(mg|minas)\b/i.test(loc)?loc:loc+', MG'));
     var gc=g('f-garc'), gt={'0':'não, só a inclusa','1':'+1 extra (além da inclusa)','2':'+2 extras (além da inclusa)','3':'+3 ou mais extras (além da inclusa)','?':'quero uma indicação'};
     if(gc)lines.push('Garçonetes extras: '+(gt[gc]||gc));
     if(g('f-obs'))lines.push('Obs.: '+g('f-obs'));
