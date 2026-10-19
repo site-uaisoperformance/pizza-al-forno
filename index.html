@@ -184,6 +184,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ember)}
 form .btn{grid-column:1/-1;width:100%;font-size:1.05rem;padding:18px}
 .form-hint{grid-column:1/-1;color:var(--muted);font-size:.85rem;text-align:center}
 .field-note{margin:0;color:var(--muted);font-size:.82rem;line-height:1.4}
+.field-note.note-hl{color:var(--ember);font-weight:600}
 @media (max-width:860px){.form-grid{grid-template-columns:1fr}.form-side .arch{display:none}}
 @media (max-width:480px){form{grid-template-columns:1fr}}
 
@@ -405,7 +406,7 @@ footer.site .credit a:hover{text-decoration:underline}
           </select></div>
         <div class="field"><label for="f-conv">Nº aproximado de convidados</label><input id="f-conv" name="convidados" type="number" min="1" inputmode="numeric" placeholder="Ex.: 80"></div>
         <div class="field full"><label for="f-garc">Garçonetes extras</label>
-          <p class="field-note">1 garçonete já está inclusa no orçamento. Se precisar de mais, escolha aqui.</p>
+          <p class="field-note note-hl">1 garçonete já está inclusa no orçamento. Se&nbsp;precisar&nbsp;de&nbsp;mais,&nbsp;escolha&nbsp;aqui.</p>
           <select id="f-garc" name="garconetes">
             <option value="0">Não, só a inclusa já basta</option>
             <option value="1">+1 garçonete extra</option>
@@ -414,7 +415,7 @@ footer.site .credit a:hover{text-decoration:underline}
             <option value="?">Não sei, quero uma indicação</option>
           </select></div>
         <div class="field full"><label for="f-local">Local do evento</label><input id="f-local" name="local" autocomplete="street-address" placeholder="Endereço ou nome do espaço. Ex.: Rua X, 100, Pampulha">
-          <span class="field-note">O link do Google Maps vai junto na mensagem.</span></div>
+          <span class="field-note">O link do Google Maps vai junto&nbsp;na&nbsp;mensagem.</span></div>
         <div class="field full"><label for="f-obs">Algo mais? (opcional)</label><textarea id="f-obs" name="obs" placeholder="Horário, sabores que você já tem em mente, restrições..."></textarea></div>
         <a class="btn btn-main" id="sendBtn" href="https://wa.me/5531993256696" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Enviar pelo WhatsApp</a>
         <p class="form-hint">Sem compromisso.</p>
