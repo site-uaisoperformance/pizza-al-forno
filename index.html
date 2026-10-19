@@ -95,10 +95,10 @@ section{padding-block:clamp(64px,9vw,112px)}
 /* Occasions strip */
 .strip{border-block:1px solid var(--line);background:var(--char);padding-block:22px}
 .strip .wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 34px;font-family:var(--display);font-size:clamp(1.15rem,2.2vw,1.5rem);color:var(--muted)}
-.strip span{display:inline-flex;align-items:center;gap:34px}
-.strip span:not(:last-child)::after{content:"✦";color:var(--clay);font-size:.8rem}
+.strip span{display:inline-flex;align-items:center;gap:14px}
+.strip span::before{content:"✦";color:var(--clay);font-size:.8rem}
 
-@media (max-width:560px){.strip .wrap{gap:6px 18px}.strip span{gap:18px}.strip span:not(:last-child)::after{display:none}}
+@media (max-width:560px){.strip .wrap{gap:6px 18px}.strip span{gap:18px}.strip span::before{display:none}}
 /* Included */
 .included{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .inc{display:grid;gap:10px;align-content:start}
@@ -400,7 +400,7 @@ footer.site .credit a:hover{text-decoration:underline}
         <div class="field"><label for="f-tipo">Tipo de evento</label>
           <select id="f-tipo" name="tipo">
             <option value="">Selecione</option>
-            <option>Casamento</option><option>Aniversário</option><option>Aniversário infantil</option><option>Chá / despedida de solteira</option><option>Confraternização de empresa</option><option>Festa em casa</option><option>Outro</option>
+            <option>Casamento</option><option>Aniversário</option><option>Aniversário infantil</option><option>Chá de bebê</option><option>Despedida de solteiro</option><option>Confraternização de empresa</option><option>Festa em casa</option><option>Outro</option>
           </select></div>
         <div class="field"><label for="f-conv">Nº aproximado de convidados</label><input id="f-conv" name="convidados" type="number" min="1" inputmode="numeric" placeholder="Ex.: 80"></div>
         <div class="field full"><label for="f-local">Local do evento (bairro / cidade)</label><input id="f-local" name="local" placeholder="Ex.: Pampulha, Belo Horizonte"></div>
